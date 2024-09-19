@@ -40,7 +40,7 @@ m.checked=false
 
 )
 
-    respostas.forEach((resposta) => {
+    respostas.forEach((resposta) => { 
         const meta = metas.find((m) => {
             return m.value ==resposta
         })
@@ -49,6 +49,18 @@ m.checked=false
 ) 
 
 console.log ('Meta(s) concluída(s)')
+}
+const metasRealizadas = async () =>{
+     const realizadas = metas.filter((meta) => {
+        return meta.checked
+     })
+if (realizadas.length == 0){
+    console.log ('Nenhuma meta foi realizada! :(')
+}
+await select ({message: "Metas realizadas",
+choices: [...realizadas]
+
+})
 }
 
 const start = async () => {
@@ -70,6 +82,10 @@ while(true){
                 value: "marcar"
             },
             {
+                name: "Metas realizadas",
+                value: "realizadas"
+            },
+            {
                 name:"Sair",
                 value: "sair"
             },
@@ -86,6 +102,9 @@ switch (opcao){
             break
             case "marcar":
                 console.log ("vamos marcar metas como concluídas")
+                break
+                case "realizadas":
+                await metasRealizadas()
                 break
             case "sair":
                 console.log("Até a próxima!")
