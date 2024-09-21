@@ -29,16 +29,17 @@ const listarMetas = async () =>{
         choices: [...metas],
         instructions:false,
     })
+    metas.forEach((m) => {
+        m.checked=false
+        
+            }
+        
+        )
     if (respostas.length==0){
         console.log("Nenhuma meta selecionada!")
         return
     }
-    metas.forEach((m) => {
-m.checked=false
-
-    }
-
-)
+ 
 
     respostas.forEach((resposta) => { 
         const meta = metas.find((m) => {
@@ -57,11 +58,26 @@ const metasRealizadas = async () =>{
 if (realizadas.length == 0){
     console.log ('Nenhuma meta foi realizada! :(')
 }
-await select ({message: "Metas realizadas",
+await select ({message: realizadas.length + " Metas realizadas ",
 choices: [...realizadas]
 
 })
 }
+
+const metasAbertas = async () => {
+    const abertas = metas.filter ((meta) => {
+        return !meta.checked
+    })
+if (abertas.length == 0){
+    console.log("Todas metas cumpridas ou nenhuma meta cadastrada")
+    return
+}
+    await select ({message: abertas.length + " Metas abertas",
+    choices: [...abertas]
+
+    })
+}
+
 
 const start = async () => {
 
@@ -77,13 +93,13 @@ while(true){
                 name:"Listar metas",
                 value:"listar"
             },
-            {
-                name: "Marcar metas como concluídas",
-                value: "marcar"
-            },
+    
             {
                 name: "Metas realizadas",
                 value: "realizadas"
+            },{
+                name: "Metas abertas",
+                value: "abertas"
             },
             {
                 name:"Sair",
@@ -93,18 +109,18 @@ while(true){
         ]
     })
 switch (opcao){
-    case "cadastrar":
-       await cadastrarMeta()
-       console.log(metas)
-        break
-        case "listar":
-           await listarMetas()
-            break
-            case "marcar":
-                console.log ("vamos marcar metas como concluídas")
+                case "cadastrar":
+                await cadastrarMeta()
+                console.log(metas)
+                break
+                case "listar":
+                await listarMetas()
                 break
                 case "realizadas":
                 await metasRealizadas()
+                break
+                case "abertas":
+                await metasAbertas()
                 break
             case "sair":
                 console.log("Até a próxima!")
