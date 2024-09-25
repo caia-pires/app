@@ -1,6 +1,10 @@
 [
   {
     "value": "Usar menos o celular",
-    "checked": false
+    "checked": true
+  },
+  {
+    "value": "Ler todos os dias",
+    "checked": true
   }
 ]

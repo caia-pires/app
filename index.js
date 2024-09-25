@@ -78,12 +78,17 @@ const metasRealizadas = async () =>{
         mensagem = "Não existem metas"
         return
     }
+
+    
      const realizadas = metas.filter((meta) => {
         return meta.checked
      })
-if (realizadas.length == 0){
-    mensagem='Nenhuma meta foi realizada! :('
-}
+
+     if (realizadas.length == 0){
+        mensagem='Nenhuma meta foi realizada! :('
+        return
+    }
+
 await select ({message: realizadas.length + " Metas realizadas ",
 choices: [...realizadas]
 
